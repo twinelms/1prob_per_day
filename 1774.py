@@ -1,7 +1,6 @@
 class Solution:
     def closestCost(self, baseCosts: List[int], toppingCosts: List[int], target: int) -> int:
         res = baseCosts[0]
-        toppingCosts.sort()
         topping = [0]
         for t in toppingCosts:
             topping = [x+n*t for x in topping for n in range(3)]
