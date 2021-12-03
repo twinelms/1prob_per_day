@@ -1,12 +1,10 @@
 class Solution:
     def validSubarrays(self, nums: List[int]) -> int:
-        first_small = [len(nums)]*len(nums)
+        nums.append(float('-inf'))
         stack = []
-        for i, n in enumerate(nums):
-            while stack and stack[-1][1] > n:
-                first_small[stack.pop()[0]] = i
-            stack.append((i,n))
         res = 0
-        for start, end in enumerate(first_small):
-            res += end-start
+        for i, n in enumerate(nums):
+            while stack and nums[stack[-1]] > n:
+                res += i-stack.pop()
+            stack.append(i)
         return res
