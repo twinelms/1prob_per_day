@@ -14,3 +14,17 @@ class Solution:
             ret[k] = max(ret[k+1], ret[k])
         return ret
             
+class Solution:
+    def findMaximums(self, nums: List[int]) -> List[int]:
+        ans = [0]*len(nums)
+        nums.append(-1)
+        stack = [-1]
+        for i,n in enumerate(nums):
+            while stack and nums[stack[-1]] > n:
+                min_val = nums[stack.pop()]
+                size = i-1-stack[-1]
+                ans[size-1] = max(ans[size-1], min_val)
+            stack.append(i)
+        for i in range(len(ans)-2, -1, -1):
+            ans[i] = max(ans[i], ans[i+1])
+        return ans
