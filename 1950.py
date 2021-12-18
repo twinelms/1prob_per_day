@@ -14,7 +14,7 @@ class Solution:
             ret[k] = max(ret[k+1], ret[k])
         return ret
             
-class Solution:
+class Solution_1:
     def findMaximums(self, nums: List[int]) -> List[int]:
         ans = [0]*len(nums)
         nums.append(-1)
