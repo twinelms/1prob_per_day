@@ -9,3 +9,16 @@ class Solution:
             else:
                 res += 1
         return res
+    
+class Solution2:
+    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        intervals.sort()
+        ret = 0
+        pre = float('-inf')
+        for a, b in intervals:
+            if pre <= a:
+                pre = b
+            else:
+                ret += 1
+                pre = min(pre, b)
+        return ret
