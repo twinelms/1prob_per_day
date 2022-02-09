@@ -1,22 +1,24 @@
+# The knows API is already defined for you.
+# return a bool, whether a knows b
+# def knows(a: int, b: int) -> bool:
+
 class Solution:
     def findCelebrity(self, n: int) -> int:
         i, j = 0, 1
+        memo = {}
+        
+        def findmemo(a, b):
+            if (a,b) not in memo:
+                memo[(a,b)] = knows(a,b)
+            return memo[(a,b)]
+        
         while j < n:
-            if knows(i,j):
-                candidate = j
+            if findmemo(i, j):
                 i = j
-            else:
-                candidate = i
             j += 1
-                
-        def validate(i):
-            for k in range(n):
-                if k != i: 
-                    if not knows(k,i) or knows(i,k): 
-                        return False
-            return True
-                    
-                    
-        if validate(candidate): 
-            return candidate
-        return -1
+            
+        for p in range(n):
+            if p != i:
+                if not findmemo(p, i) or findmemo(i, p):
+                    return -1
+        return i
